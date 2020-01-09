@@ -7,5 +7,5 @@ const transSchema = new Schema({
     vendor: String    
 })
 
-const City = mongoose.model("transaction", transSchema)
-module.exports = City
+const Transaction = mongoose.model("transaction", transSchema)
+module.exports = Transaction

@@ -2,8 +2,15 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Transactions from './components/Transactions';
+const express = require('express')
+const app = express()
+const port = 3333
 
 function App() {
+
+  app.listen(port, function () {
+    console.log("the server is running on port:" + port)
+})
 
   const state = {
     user: "bez",
