@@ -9,11 +9,18 @@ function App() {
     user: "bez",
     items:
       [
-        { amount: 3200, vendor: "Elevation", category: "Salary" },
+        { amount: 200, vendor: "Elevation", category: "Salary" },
         { amount: -7, vendor: "Runescape", category: "Entertainment" },
         { amount: -20, vendor: "Subway", category: "Food" },
         { amount: -98, vendor: "La Baguetterie", category: "Food" }
       ]
+
+  }
+
+  function calcBalance(arr){
+    const res = arr.reduce((a, b) => a + b["amount"] | 0, 0); 
+    console.log(res);
+    return res;
 
   }
 
@@ -26,6 +33,8 @@ function App() {
         <Link to="/">Go Home</Link>
         <Link to="/about">Read About</Link>
       </div> */}
+
+      <h2>My Balance: {calcBalance(state.items)}</h2>
 
         <Route path="/" exact render={() =>
           <Transactions key={0} items={state.items}></Transactions>}>
