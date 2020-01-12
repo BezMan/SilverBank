@@ -16,21 +16,9 @@ class App extends Component {
 
     }
   }
-  deleteTrans = async (id) => {
-    console.log(id)
-    await axios.delete(`http://localhost:5000/transactions/${id}`);
-    this.getData()
-  }
-  componentDidMount = async () => {
-    await axios.get(`http://localhost:5000/transactions`)
-      .then(res => {
-        const transactions = res.data;
-        this.setState({
-          transactions: transactions
-        });
-      })
-  
 
+  componentDidMount = async () => {
+    this.getData()
   }
 
 
@@ -42,8 +30,6 @@ class App extends Component {
     this.setState({
       transactions: transactions
     });
-
-  
 }
 
 
@@ -52,6 +38,12 @@ deposit = async (transaction) => {
   this.getData()
 }
 
+
+deleteTrans = async (id) => {
+  console.log(id)
+  await axios.delete(`http://localhost:5000/transactions/${id}`);
+  this.getData()
+}
 
 
 render() {
@@ -66,8 +58,8 @@ render() {
       <span className="nav"><Link to='./Transactions'> Transactions </Link></span>
       </div>
       <hr/>
-      <h1>BANK</h1>
-      <h2 className={amount >500 ? "green": "red"} >Your Balance : {this.state.transactions.length == 0 ? 0 : amount} </h2>
+      <h1 class="title">SILVERBANK</h1>
+      <h2 className={amount >= 0 ? "green": "red"} >My Balance : {amount} </h2>
       
       <Route exact path='/operation' render={()=><Operation deposit={this.deposit} />}/>
       <Route exact path='/Transactions' render={()=><Transactions transactions={this.state.transactions} deleteTrans={this.deleteTrans} /> }/>

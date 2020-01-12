@@ -12,10 +12,10 @@ class Transactions extends Component {
         return (
             <Router>
             <div>
-                <div><Link to='./Category'> Transactions per Category: </Link></div>
+                {/* <div><Link to='./Category'> Transactions per Category: </Link></div>
                 <hr></hr>
                 <Route exact path='/Category' render={()=>
-                <Category transactions={this.props.transactions} />}/>
+                <Category transactions={this.props.transactions} />}/> */}
                 {this.props.transactions.map(t=> 
                  {return <Transaction key={t._id} deleteTrans={this.deleteTrans} transId={t._id} amount={t.amount} vendor={t.vendor} category={t.category} /> })}
             </div>
