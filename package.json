@@ -49,5 +49,6 @@
   "bugs": {
     "url": "https://github.com/BezMan/SilverBank/issues"
   },
-  "homepage": "https://github.com/BezMan/SilverBank#readme"
+  "homepage": "https://github.com/BezMan/SilverBank#readme",
+  "devDependencies": {}
 }

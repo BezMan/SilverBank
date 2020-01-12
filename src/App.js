@@ -1,63 +1,82 @@
-import React from 'react';
+
+import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Transactions from './components/Transactions';
-const express = require('express')
-const app = express()
-const port = 3333
+import axios from 'axios';
+import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import React, { Component } from 'react';
+import Transactions from './components/Transactions'
+import Operation from './components/Operation'
 
-function App() {
 
-  app.listen(port, function () {
-    console.log("the server is running on port:" + port)
-})
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      transactions: [],
 
-  const state = {
-    user: "bez",
-    items:
-      [
-        { amount: 200, vendor: "Elevation", category: "Salary" },
-        { amount: -7, vendor: "Runescape", category: "Entertainment" },
-        { amount: -20, vendor: "Subway", category: "Food" },
-        { amount: -98, vendor: "La Baguetterie", category: "Food" }
-      ]
+    }
+  }
+  deleteTrans = async (id) => {
+    console.log(id)
+    await axios.delete(`http://localhost:5000/transactions/${id}`);
+    this.getData()
+  }
+  componentDidMount = async () => {
+    await axios.get(`http://localhost:5000/transactions`)
+      .then(res => {
+        const transactions = res.data;
+        this.setState({
+          transactions: transactions
+        });
+      })
+  
 
   }
 
-  function calcBalance(arr){
-    const res = arr.reduce((a, b) => a + b["amount"] | 0, 0); 
-    console.log(res);
-    return res;
 
-  }
+  getData = async () => {
+    let x = await axios.get(`http://localhost:5000/transactions`)
 
+    const transactions = x.data;
+    console.log(transactions)
+    this.setState({
+      transactions: transactions
+    });
+
+  
+}
+
+
+deposit = async (transaction) => {
+  await axios.post(`http://localhost:5000/transaction`, transaction)
+  this.getData()
+}
+
+
+
+render() {
+  let amount = 0
+  this.state.transactions.map(t => amount += t.amount)
   return (
     <Router>
-      <div className="App">
-        <div id="home-background"></div>
-
-        {/* <div id="main-links">
-        <Link to="/">Go Home</Link>
-        <Link to="/about">Read About</Link>
-      </div> */}
-
-      <h2>My Balance: {calcBalance(state.items)}</h2>
-
-        <Route path="/" exact render={() =>
-          <Transactions key={0} items={state.items}></Transactions>}>
-        </Route>
-
-        {/* {<Route path="/about" exact render={() => <About items={Object.keys(state)} />} />}  */}
-
-        {/* <Route path = "/directory/:fentities" exact render={({match}) => 
-    <Fentities state={state} match={match}></Fentities> }/>
-
-    <Route path = "/directory/:fentities/:name" exact render={({match}) => 
-    <Fentity state={state} match={match}></Fentity> }/> */}
-
+    <div>
+      <div className="navigate">
+      <span className="nav"><Link to='/'> Home</Link></span>
+      <span className="nav"><Link to='./Operation'> Operation </Link></span>
+      <span className="nav"><Link to='./Transactions'> Transactions </Link></span>
       </div>
+      <hr/>
+      <h1>BANK</h1>
+      <h2 className={amount >500 ? "green": "red"} >Your Balance : {this.state.transactions.length == 0 ? 0 : amount} </h2>
+      
+      <Route exact path='/operation' render={()=><Operation deposit={this.deposit} />}/>
+      <Route exact path='/Transactions' render={()=><Transactions transactions={this.state.transactions} deleteTrans={this.deleteTrans} /> }/>
+      
+    </div>
     </Router>
   );
 }
+}
 
 export default App;
+

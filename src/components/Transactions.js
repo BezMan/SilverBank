@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
-import Transaction from './Transaction';
-
+import Transaction from './Transaction'
+import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import Category from './Category'
 class Transactions extends Component {
+    deleteTrans= (id)=>{
+        this.props.deleteTrans(id)
+    }
 
+    
     render() {
-        const items = this.props.items;
-        // console.log(items);
-        let i = 0
-
         return (
+            <Router>
             <div>
-                {items.map(element => <Transaction key={i++} element={element} />)}
+                <div><Link to='./Category'> Transactions per Category: </Link></div>
+                <hr></hr>
+                <Route exact path='/Category' render={()=>
+                <Category transactions={this.props.transactions} />}/>
+                {this.props.transactions.map(t=> 
+                 {return <Transaction key={t._id} deleteTrans={this.deleteTrans} transId={t._id} amount={t.amount} vendor={t.vendor} category={t.category} /> })}
             </div>
-        )
+            </Router>
+        );
     }
 }
 
