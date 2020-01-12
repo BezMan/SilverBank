@@ -13,11 +13,11 @@ class App extends Component {
     super()
     this.state = {
       transactions: [],
-
     }
   }
 
   componentDidMount = async () => {
+    console.log("componentDidMount");
     this.getData()
   }
 

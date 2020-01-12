@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require ('mongoose')
-const transaction = require('./model/bank')
+const Bank = require('./model/bank')
 mongoose.connect('mongodb://localhost/Bank', { useNewUrlParser: true })
 
 const app = express();
@@ -14,12 +14,11 @@ app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*')
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With')
-
     next()
 })
 
 app.get('/transactions', async (req, res)  => {
-    let allDoc= await transaction.find({})
+    let allDoc= await Bank.find({})
     console.log(allDoc)
     res.send(allDoc)
     })
@@ -27,14 +26,14 @@ app.get('/transactions', async (req, res)  => {
 
 app.post('/transaction', async (req, res) => {
     let data=req.body
-    let trans= new transaction(data)
+    let trans= new Bank(data)
     await trans.save()
     res.send("all good")
 });
 
 
 app.delete('/transactions/:id', (req,res)=>{
-    transaction.findOneAndRemove({_id: req.params.id},  function(err,data)
+    Bank.findOneAndRemove({_id: req.params.id},  function(err,data)
     {
         res.send('yalla')
     });
