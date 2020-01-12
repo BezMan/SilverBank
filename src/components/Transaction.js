@@ -8,10 +8,10 @@ class Transaction extends Component {
     render() {
         return (
             <div className= {this.props.amount >= 0 ? "Green" : "Red" }>
-                <div>{this.props.amount}</div>
-                <div>{this.props.vendor}</div>
-                <div>{this.props.category}</div>
                 <button onClick={this.deleteTrans}>Delete</button>
+                <span>     {this.props.amount}, </span>
+                <span>{this.props.vendor}, </span>
+                <span>{this.props.category}</span>
             </div>
         );
     }

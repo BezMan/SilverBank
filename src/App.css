@@ -6,6 +6,18 @@
   color: silver;
 }
 
+input{
+  display: block;
+}
+
+.block {
+  border: line;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -42,16 +54,14 @@
 }
 
 .Green{
-  width: 140px;
-  padding: 10px;
+  padding: 2px;
   border: 2px dotted rgb(9, 231, 46);
-  margin: 0;
+  margin: 0 10px 3px;
 }
 .Red{
-  width: 140px;
-  padding: 10px;
+  padding: 2px;
   border: 2px dotted red;
-  margin: 0;
+  margin: 0 10px 3px;
 }
 .navigate{
   display: grid;
@@ -59,12 +69,9 @@
   justify-items: center;
   background-color: salmon;
 }
-.nav{
-
-  justify-content: center;
-}
 
 .nav {
+  justify-content: center;
   color: #213999;
   font-weight: 500;
   -webkit-transition: color 0.2s;

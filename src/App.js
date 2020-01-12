@@ -59,7 +59,10 @@ render() {
       </div>
       <hr/>
       <h1 class="title">SILVERBANK</h1>
-      <h2 className={amount >= 0 ? "green": "red"} >My Balance : {amount} </h2>
+      <h2>
+        <span>Balance: </span>
+        <span className={amount >= 0 ? "green": "red"} >{amount}</span> 
+      </h2>
       
       <Route exact path='/operation' render={()=><Operation deposit={this.deposit} />}/>
       <Route exact path='/Transactions' render={()=><Transactions transactions={this.state.transactions} deleteTrans={this.deleteTrans} /> }/>
