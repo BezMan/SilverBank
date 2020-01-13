@@ -3,8 +3,13 @@ import axios from 'axios'
 
 class Transaction extends Component {
 
+    constructor(props) {
+        super(props);
+        this.t = this.props.transaction
+      }
+      
     deleteTrans = async () => {
-        let id = this.props.transId
+        let id = this.t._id
         console.log(id)
         await axios.delete(`http://localhost:5000/transactions/${id}`);
         this.props.getData()
@@ -13,11 +18,11 @@ class Transaction extends Component {
     
     render() {
         return (
-            <div className= {this.props.amount >= 0 ? "Green" : "Red" }>
+            <div className= {this.t.amount >= 0 ? "Green" : "Red" }>
                 <button onClick={this.deleteTrans}>Delete</button>
-                <span>     {this.props.amount}, </span>
-                <span>{this.props.vendor}, </span>
-                <span>{this.props.category}</span>
+                <span>     {this.t.amount}, </span>
+                <span>{this.t.vendor}, </span>
+                <span>{this.t.category}</span>
             </div>
         );
     }

@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   componentDidMount = async () => {
-    console.log("componentDidMount");
+    // console.log("componentDidMount");
     this.getData()
   }
 
@@ -31,19 +31,6 @@ class App extends Component {
       transactions: transactions
     });
 }
-
-
-// deposit = async (transaction) => {
-//   await axios.post(`http://localhost:5000/transaction`, transaction)
-//   this.getData()
-// }
-
-
-// deleteTrans = async (id) => {
-//   console.log(id)
-//   await axios.delete(`http://localhost:5000/transactions/${id}`);
-//   this.getData()
-// }
 
 
 render() {

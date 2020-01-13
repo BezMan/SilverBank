@@ -3,11 +3,6 @@ import Transaction from './Transaction'
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import Category from './Category'
 class Transactions extends Component {
-    // deleteTrans= (id)=>{
-    //     this.props.deleteTrans(id)
-    // }
-
-    
     
     render() {
         return (
@@ -17,8 +12,8 @@ class Transactions extends Component {
                 <hr></hr>
                 <Route exact path='/Category' render={()=>
                 <Category transactions={this.props.transactions} />}/> */}
-                {this.props.transactions.map(t=> 
-                 {return <Transaction key={t._id} getData={this.props.getData} transId={t._id} amount={t.amount} vendor={t.vendor} category={t.category} /> })}
+                {this.props.transactions.map(transaction => 
+                 {return <Transaction getData={this.props.getData}  transaction={transaction}/> })}
             </div>
             </Router>
         );
