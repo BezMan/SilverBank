@@ -26,7 +26,7 @@ class App extends Component {
     let x = await axios.get(`http://localhost:5000/transactions`)
 
     const transactions = x.data;
-    console.log(transactions)
+    // console.log(transactions)
     this.setState({
       transactions: transactions
     });

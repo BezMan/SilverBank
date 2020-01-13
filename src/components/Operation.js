@@ -10,7 +10,7 @@ class Operation extends Component {
         }
     }
 
-    changedState =  (e) => {
+    changedState =  (e) => { //updating state on each letter typed
         const name = e.target.name
         let value = e.target.value
         if (name === "amount") {
