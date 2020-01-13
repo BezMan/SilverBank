@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 
 class Operation extends Component {
     constructor() {
@@ -22,7 +23,7 @@ class Operation extends Component {
     deposit= ()=>{
         let dep={amount:this.state.amount, vendor:this.state.vendor, category:this.state.category}
         if(dep.amount > 0 && dep.vendor !== "" && dep.category !== ""){
-        this.props.deposit(dep)
+            this.addTransaction(dep)
         }
 
     }
@@ -30,10 +31,16 @@ class Operation extends Component {
     withdraw= ()=>{
         let dep={amount:-(this.state.amount), vendor:this.state.vendor, category:this.state.category}
         if(dep.amount < 0 && dep.vendor !== "" && dep.category !== ""){
-        this.props.deposit(dep)
+            this.addTransaction(dep)
         }
        
     }
+
+    addTransaction = async (transaction) => {
+        await axios.post(`http://localhost:5000/transaction`, transaction)
+        this.props.getData()
+      }
+      
 
     render() {
         return (

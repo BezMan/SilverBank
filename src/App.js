@@ -33,17 +33,17 @@ class App extends Component {
 }
 
 
-deposit = async (transaction) => {
-  await axios.post(`http://localhost:5000/transaction`, transaction)
-  this.getData()
-}
+// deposit = async (transaction) => {
+//   await axios.post(`http://localhost:5000/transaction`, transaction)
+//   this.getData()
+// }
 
 
-deleteTrans = async (id) => {
-  console.log(id)
-  await axios.delete(`http://localhost:5000/transactions/${id}`);
-  this.getData()
-}
+// deleteTrans = async (id) => {
+//   console.log(id)
+//   await axios.delete(`http://localhost:5000/transactions/${id}`);
+//   this.getData()
+// }
 
 
 render() {
@@ -64,8 +64,8 @@ render() {
         <span className={amount >= 0 ? "green": "red"} >{amount}</span> 
       </h2>
       
-      <Route exact path='/operation' render={()=><Operation deposit={this.deposit} />}/>
-      <Route exact path='/Transactions' render={()=><Transactions transactions={this.state.transactions} deleteTrans={this.deleteTrans} /> }/>
+      <Route exact path='/operation' render={()=><Operation getData={this.getData} />}/>
+      <Route exact path='/Transactions' render={()=><Transactions transactions={this.state.transactions} getData={this.getData} /> }/>
       
     </div>
     </Router>
