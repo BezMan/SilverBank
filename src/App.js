@@ -41,8 +41,8 @@ render() {
     <div>
       <div className="navigate">
       <span className="nav"><Link to='/'> Home</Link></span>
-      <span className="nav"><Link to='./Operation'> Operation </Link></span>
-      <span className="nav"><Link to='./Transactions'> Transactions </Link></span>
+      <span className="nav"><Link to='./operation'> Operation </Link></span>
+      <span className="nav"><Link to='./transactions'> Transactions </Link></span>
       </div>
       <hr/>
       <h1 class="title">SILVERBANK</h1>
@@ -52,7 +52,7 @@ render() {
       </h2>
       
       <Route exact path='/operation' render={()=><Operation getData={this.getData} />}/>
-      <Route exact path='/Transactions' render={()=><Transactions transactions={this.state.transactions} getData={this.getData} /> }/>
+      <Route exact path='/transactions' render={()=><Transactions transactions={this.state.transactions} getData={this.getData} /> }/>
       
     </div>
     </Router>

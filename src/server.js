@@ -28,14 +28,14 @@ app.post('/transaction', async (req, res) => {
     let data=req.body
     let trans= new Bank(data)
     await trans.save()
-    res.send("all good")
+    res.send("saved transaction")
 });
 
 
 app.delete('/transactions/:id', (req,res)=>{
-    Bank.findOneAndRemove({_id: req.params.id},  function(err,data)
-    {
-        res.send('yalla')
+    let id = req.params.id
+    Bank.findOneAndRemove({_id: id},  function(err,data){
+        res.send('removed by id: ' + id )
     });
 })
 
