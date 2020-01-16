@@ -33,9 +33,15 @@ class App extends Component {
 }
 
 
+calcBalance() {
+  let amount = 0;
+  this.state.transactions.map(t => amount += t.amount);
+  return amount;
+}
+
+
 render() {
-  let amount = 0
-  this.state.transactions.map(t => amount += t.amount)
+  let balance = this.calcBalance();
   return (
     <Router>
     <div>
@@ -48,10 +54,10 @@ render() {
       <h1 class="title">SILVERBANK</h1>
       <h2>
         <span>Balance: </span>
-        <span className={amount >= 0 ? "green": "red"} >{amount}</span> 
+        <span className={balance >= 0 ? "green": "red"} >{balance}</span> 
       </h2>
       
-      <Route exact path='/operation' render={()=><Operation getData={this.getData} />}/>
+      <Route exact path='/operation' render={()=><Operation balance={balance} getData={this.getData} />}/>
       <Route exact path='/transactions' render={()=><Transactions transactions={this.state.transactions} getData={this.getData} /> }/>
       
     </div>
