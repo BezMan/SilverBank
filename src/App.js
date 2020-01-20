@@ -1,5 +1,4 @@
 
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
@@ -47,8 +46,8 @@ render() {
     <div>
       <div className="navigate">
       <span className="nav"><Link to='/'> Home</Link></span>
-      <span className="nav"><Link to='./operation'> Operation </Link></span>
-      <span className="nav"><Link to='./transactions'> Transactions </Link></span>
+      <span className="nav"><Link to='/operation'> Operation </Link></span>
+      <span className="nav"><Link to='/transactions'> Transactions </Link></span>
       </div>
       <hr/>
       <h1 class="title">SILVERBANK</h1>

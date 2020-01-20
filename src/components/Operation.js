@@ -25,7 +25,7 @@ class Operation extends Component {
     }
 
 
-    addTransaction = async (isWithdraw) => {
+    validateTransaction = async (isWithdraw) => {
         let realAmount = this.state.amount
         if(isWithdraw){
             realAmount *= -1
@@ -33,18 +33,14 @@ class Operation extends Component {
             // console.log(this.props.balance);
             if (this.props.balance >= 500 && this.props.balance + realAmount < 500) {
                 this.setState({ openSnackbar: true })
-            }
-            else{
-                await this.doTrans(realAmount)
+                return
             }
         }
-        else {
-            await this.doTrans(realAmount);
-        }
+        this.addTransaction(realAmount);
     }
       
 
-    async doTrans(realAmount) {
+    async addTransaction(realAmount) {
         let transaction = { amount: realAmount, vendor: this.state.vendor, category: this.state.category };
         if (transaction.amount !== "" && transaction.vendor !== "" && transaction.category !== "") {
             await axios.post(`http://localhost:5000/transaction`, transaction);
@@ -56,14 +52,14 @@ class Operation extends Component {
     render() {
         return (
             this.state.isRedirect ? 
-            <Redirect to="/transactions"/> :
+            <Redirect to="/transactions"/> : //else , render this component
             <div>
                 <input name="amount" value={this.state.amount} type='number' onChange={this.changedState} placeholder='Amount' />
                 <input name="vendor" value={this.state.vendor} type='text' onChange={this.changedState} placeholder='Vendor' />
                 <input name="category" value={this.state.category} type='text' onChange={this.changedState} placeholder='Category' />
                 <div class="operations">
-                    <button class="block green" onClick={() => this.addTransaction(false)} >Deposit</button>
-                    <button class="block red" onClick={() => this.addTransaction(true)} >Withdraw</button>
+                    <button class="block green" onClick={() => this.validateTransaction(false)} >Deposit</button>
+                    <button class="block red" onClick={() => this.validateTransaction(true)} >Withdraw</button>
                 </div>
 
                     <Snackbar
